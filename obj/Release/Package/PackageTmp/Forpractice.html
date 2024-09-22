@@ -1,0 +1,42 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+    <script src="Scripts/jquery-3.4.1.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function ()
+        {
+            var list = $("#unorderdList");
+            debugger;
+            $("#btn_get").click(function(){
+                $.ajax({
+                    type: "GET",
+                    url: "api/getDocumentStatusForAllDeparments",
+                    dataType: "JSON",
+                    success: function (data) {
+                        list.empty();
+                        $.each(data, function (index, val) {
+                            var dat = val.Department1;
+                            list.append("<li>" + dat + "</li>");
+                        });
+                    }
+                });
+            });
+
+            $("#btn_clear").click(function () {
+                list.empty();
+            });
+        });
+    </script>
+</head>
+<body>
+    <input type="button" id="btn_get" value="Get List" />
+    <input type="button" id="btn_clear" value="Clear" />
+
+    <ul id="unorderdList">
+        <li>hello</li>
+    </ul>
+
+</body>
+</html>
